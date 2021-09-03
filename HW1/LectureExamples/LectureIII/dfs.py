@@ -37,7 +37,7 @@ def DFS(graph, start, end, path, shortest, toPrint=False):
         return path
     for node in graph.childrenOf(start):
         #goes to first child node of src node
-        if node not in path: #prevents looping
+        if node not in path: #prevents loopingnew
             if shortest == None or len(path) < len(shortest):
                 #checks if new path is shorter than previous paths
                 newPath = DFS(graph, node, end, path, shortest, toPrint)
