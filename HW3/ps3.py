@@ -7,11 +7,11 @@
 import math
 import random
 
-import ps3_visualize
+#import ps3_visualize
 import pylab
 
 # For python 2.7:
-from ps3_verify_movement27 import test_robot_movement
+#from ps3_verify_movement27 import test_robot_movement
 
 
 # === Provided class Position
@@ -108,11 +108,12 @@ class RectangularRoom(object):
         Note: The amount of dirt on each tile should be NON-NEGATIVE.
               If the capacity exceeds the amount of dirt on the tile, mark it as 0.
         """
-        x = pos.get_x() - 1
-        y = pos.get_y() - 1
+        x = int(pos.get_x()) - 1
+        y = int(pos.get_y()) - 1
         self.room[y][x] -= capacity
         if self.room[y][x] < 0:
             self.room[y][x] = 0
+        print(self.room)
 
     def is_tile_cleaned(self, m, n):
         """
@@ -151,7 +152,7 @@ class RectangularRoom(object):
         """
         x = pos.get_x()
         y = pos.get_y()
-        if x > self.width or y > self.height:
+        if x >= self.width or y >= self.height or x < 0 or y < 0:
             return False
         return True
         
@@ -403,15 +404,17 @@ class StandardRobot(Robot):
         newposition = self.get_robot_position().get_new_position(self.get_robot_direction(), self.speed)
         if self.room.is_position_valid(newposition):
             self.set_robot_position(newposition)
+            self.room.clean_tile_at_position(newposition, self.capacity)
         else:
             self.set_robot_direction(random.uniform(0, 360))
 room1 = FurnishedRoom(7, 8, 2)
 r1 = StandardRobot(room1, 2, 2)
-print(r1.get_robot_position())
-print(r1.get_robot_direction())
-r1.update_position_and_clean()
-print(r1.get_robot_position())
-print(r1.get_robot_direction())
+for x in range(25):
+	print(r1.get_robot_position())
+	print(r1.get_robot_direction())
+	r1.update_position_and_clean()
+	print(r1.get_robot_position())
+	print(r1.get_robot_direction())
 # Uncomment this line to see your implementation of StandardRobot in action!
 #test_robot_movement(StandardRobot, EmptyRoom)
 #test_robot_movement(StandardRobot, FurnishedRoom)
