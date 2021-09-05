@@ -105,7 +105,10 @@ class RobotVisualization:
                     #get dirt amount
                     dirtAmount = room.get_dirt_amount(i, j)
                     color = 150
-                    color = int(color/dirtAmount)
+                    if dirtAmount == 0:
+                        color = 0
+                    else:
+                        color = int(color/dirtAmount)
                     r = color
                     g = color
                     b = color
