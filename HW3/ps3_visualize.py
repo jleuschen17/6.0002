@@ -104,10 +104,10 @@ class RobotVisualization:
                 if (not room.is_tile_cleaned(i, j) and not self.furniture_tiles) or (not room.is_tile_cleaned(i, j) and not room.is_tile_furnished(i, j)):
                     #get dirt amount
                     dirtAmount = room.get_dirt_amount(i, j)
-                    color = 150
                     if dirtAmount == 0:
                         color = 0
                     else:
+                        color = 150
                         color = int(color/dirtAmount)
                     r = color
                     g = color
